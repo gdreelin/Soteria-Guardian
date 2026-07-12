@@ -1,0 +1,1 @@
+The README uses `images/soteria-guardian-logo-dark.jpg` as the primary project logo. The asset is optimized for GitHub display while preserving the original dark-background design.
