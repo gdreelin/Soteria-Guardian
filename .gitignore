@@ -1,0 +1,10 @@
+node_modules/
+.expo/
+dist/
+.env
+*.jks
+*.p8
+*.p12
+*.mobileprovision
+.DS_Store
+Thumbs.db
