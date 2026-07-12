@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="images/soteria-guardian-logo.jpg" alt="Soteria Guardian logo" width="640">
+</p>
+
 # Soteria Guardian
 
 **Protecting Independence. Preserving Peace of Mind.**
