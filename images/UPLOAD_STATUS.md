@@ -1,1 +1,0 @@
-The new dark Soteria Guardian logo has been selected for the README. Binary image publication is being finalized through the repository asset workflow.
