@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/soteria-guardian-logo.jpg" alt="Soteria Guardian logo" width="640">
+  <img src="images/soteria-guardian-logo-dark.jpg" alt="Soteria Guardian logo" width="500">
 </p>
 
 # Soteria Guardian
