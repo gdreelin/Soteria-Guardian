@@ -1,0 +1,1 @@
+Binary upload staging marker. This file can be removed after the image asset is verified.
