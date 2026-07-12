@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/><stop offset="1" stop-color="#0b1828"/>
+    </linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-opacity=".35"/></filter>
+  </defs>
+  <rect width="1200" height="320" rx="28" fill="url(#bg)" stroke="#1f3c59"/>
+  <text x="55" y="58" fill="#f5f7fa" font-family="Arial, sans-serif" font-size="30" font-weight="700">Architecture Overview</text>
+  <text x="55" y="88" fill="#8aa4bd" font-family="Arial, sans-serif" font-size="16">Home Assistant remains the control plane. Soteria Guardian provides the caregiver experience.</text>
+  <g filter="url(#shadow)">
+    <rect x="55" y="125" width="180" height="135" rx="18" fill="#0e2118" stroke="#77b255"/>
+    <text x="145" y="165" text-anchor="middle" fill="#b8e59b" font-family="Arial" font-size="26">●</text>
+    <text x="145" y="198" text-anchor="middle" fill="#fff" font-family="Arial" font-size="19" font-weight="700">Resident</text>
+    <text x="145" y="225" text-anchor="middle" fill="#b6c4cf" font-family="Arial" font-size="14">Wearables &amp; sensors</text>
+    <rect x="275" y="125" width="180" height="135" rx="18" fill="#0b2030" stroke="#2fa9ff"/>
+    <text x="365" y="165" text-anchor="middle" fill="#52c7ff" font-family="Arial" font-size="24">◆</text>
+    <text x="365" y="198" text-anchor="middle" fill="#fff" font-family="Arial" font-size="19" font-weight="700">Home Assistant</text>
+    <text x="365" y="225" text-anchor="middle" fill="#b6c4cf" font-family="Arial" font-size="14">Automation &amp; control</text>
+    <rect x="495" y="125" width="210" height="135" rx="18" fill="#221b0c" stroke="#f0a400"/>
+    <text x="600" y="165" text-anchor="middle" fill="#f0b53f" font-family="Arial" font-size="24">⬡</text>
+    <text x="600" y="198" text-anchor="middle" fill="#fff" font-family="Arial" font-size="19" font-weight="700">Soteria Guardian</text>
+    <text x="600" y="225" text-anchor="middle" fill="#b6c4cf" font-family="Arial" font-size="14">Core, alerts &amp; wellness</text>
+    <rect x="745" y="125" width="180" height="135" rx="18" fill="#21172d" stroke="#a778db"/>
+    <text x="835" y="165" text-anchor="middle" fill="#c99aff" font-family="Arial" font-size="24">▰</text>
+    <text x="835" y="198" text-anchor="middle" fill="#fff" font-family="Arial" font-size="19" font-weight="700">Cameras</text>
+    <text x="835" y="225" text-anchor="middle" fill="#b6c4cf" font-family="Arial" font-size="14">Verification &amp; privacy</text>
+    <rect x="965" y="125" width="180" height="135" rx="18" fill="#0d2424" stroke="#43d6cf"/>
+    <text x="1055" y="165" text-anchor="middle" fill="#69e0da" font-family="Arial" font-size="24">●●●</text>
+    <text x="1055" y="198" text-anchor="middle" fill="#fff" font-family="Arial" font-size="19" font-weight="700">Caregivers</text>
+    <text x="1055" y="225" text-anchor="middle" fill="#b6c4cf" font-family="Arial" font-size="14">Apps, alerts &amp; reports</text>
+  </g>
+  <g fill="#83a7c4" font-family="Arial" font-size="34">
+    <text x="248" y="200">→</text><text x="468" y="200">→</text><text x="718" y="200">→</text><text x="938" y="200">→</text>
+  </g>
+</svg>
