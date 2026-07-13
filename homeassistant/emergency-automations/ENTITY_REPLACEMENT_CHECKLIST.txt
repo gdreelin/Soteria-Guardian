@@ -1,0 +1,31 @@
+ENTITY REPLACEMENT CHECKLIST
+============================
+
+Replace these placeholders before enabling the automations:
+
+1. Aqara switch
+   REPLACE_WITH_AQARA_DEVICE_ID
+
+2. Caregiver notification service
+   notify.mobile_app_caregiver_phone
+
+3. Fall detection sensor
+   binary_sensor.living_room_fp2_fall_detected
+
+4. Alexa devices
+   media_player.living_room_echo
+   media_player.bedroom_echo
+
+5. Alexa notification service
+   notify.alexa_media
+
+6. Wyze RGB bulbs
+   light.living_room_lamp_left
+   light.living_room_lamp_right
+   light.living_room_ceiling
+
+7. Optional dashboard URLs
+   Add your Home Assistant dashboard path to notification data if desired.
+
+8. Ring Alarm
+   No Ring alarm-triggering action is enabled in this package.
