@@ -1,0 +1,99 @@
+# Soteria Guardian MVP package
+# Replace entity IDs and notify services with those used in your Home Assistant instance.
+
+input_boolean:
+  soteria_guardian_active_alert:
+    name: Soteria Guardian Active Alert
+    icon: mdi:shield-alert
+
+input_text:
+  soteria_guardian_current_room:
+    name: Soteria Guardian Current Room
+    initial: Unknown
+    max: 64
+  soteria_guardian_last_movement:
+    name: Soteria Guardian Last Movement
+    initial: Unavailable
+    max: 128
+  soteria_guardian_alert_source:
+    name: Soteria Guardian Alert Source
+    initial: None
+    max: 128
+
+input_datetime:
+  soteria_guardian_alert_started:
+    name: Soteria Guardian Alert Started
+    has_date: true
+    has_time: true
+
+script:
+  soteria_guardian_emergency:
+    alias: Soteria Guardian Emergency
+    mode: restart
+    sequence:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.soteria_guardian_active_alert
+      - service: input_datetime.set_datetime
+        target:
+          entity_id: input_datetime.soteria_guardian_alert_started
+        data:
+          datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+      - service: input_text.set_value
+        target:
+          entity_id: input_text.soteria_guardian_alert_source
+        data:
+          value: "Soteria Guardian app"
+      # Add caregiver mobile notifications, visual light alerts, and camera snapshots here.
+
+  soteria_guardian_acknowledge:
+    alias: Soteria Guardian Acknowledge
+    mode: queued
+    sequence:
+      - event: soteria_guardian_alert_acknowledged
+        event_data:
+          acknowledged_at: "{{ now().isoformat() }}"
+
+  soteria_guardian_resolve:
+    alias: Soteria Guardian Resolve
+    mode: restart
+    sequence:
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.soteria_guardian_active_alert
+      - service: input_text.set_value
+        target:
+          entity_id: input_text.soteria_guardian_alert_source
+        data:
+          value: "None"
+      - event: soteria_guardian_alert_resolved
+        event_data:
+          resolved_at: "{{ now().isoformat() }}"
+
+  soteria_guardian_system_test:
+    alias: Soteria Guardian System Test
+    mode: single
+    sequence:
+      - event: soteria_guardian_system_test
+        event_data:
+          tested_at: "{{ now().isoformat() }}"
+      # Add non-emergency test notifications and visual feedback here.
+
+# Example templates. Update source entities after pairing the FP2 sensors,
+# Mini Switch, and G350 camera with Home Assistant.
+template:
+  - binary_sensor:
+      - name: Soteria Guardian Bedroom Presence
+        unique_id: soteria_guardian_bedroom_presence
+        state: "{{ is_state('binary_sensor.bedroom_fp2_presence', 'on') }}"
+        availability: "{{ states('binary_sensor.bedroom_fp2_presence') not in ['unknown', 'unavailable'] }}"
+      - name: Soteria Guardian Living Room Presence
+        unique_id: soteria_guardian_living_room_presence
+        state: "{{ is_state('binary_sensor.living_room_fp2_presence', 'on') }}"
+        availability: "{{ states('binary_sensor.living_room_fp2_presence') not in ['unknown', 'unavailable'] }}"
+  - sensor:
+      - name: Soteria Guardian Wearable Battery
+        unique_id: soteria_guardian_wearable_battery
+        unit_of_measurement: "%"
+        state: "{{ states('sensor.aqara_mini_switch_battery') }}"
+        availability: "{{ states('sensor.aqara_mini_switch_battery') not in ['unknown', 'unavailable'] }}"
