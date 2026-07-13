@@ -1,0 +1,50 @@
+- id: soteria_caregiver_notification_actions
+  alias: Soteria - Caregiver Notification Actions
+  description: Processes caregiver acknowledgment and reset actions from mobile notifications.
+  mode: parallel
+  max: 5
+
+  triggers:
+    - trigger: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: SOTERIA_ACKNOWLEDGE
+      id: acknowledge
+
+    - trigger: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: SOTERIA_RESET
+      id: reset
+
+    - trigger: state
+      entity_id: input_button.soteria_caregiver_acknowledge
+      id: acknowledge
+
+  conditions: []
+
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: acknowledge
+          sequence:
+            - action: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.soteria_caregiver_acknowledged
+
+            - action: persistent_notification.create
+              data:
+                title: "Soteria Emergency Acknowledged"
+                message: >-
+                  The caregiver acknowledged the emergency.
+                  The visual alert remains active until reset.
+                notification_id: soteria_emergency_acknowledged
+
+        - conditions:
+            - condition: trigger
+              id: reset
+          sequence:
+            - action: input_button.press
+              target:
+                entity_id: input_button.soteria_emergency_reset
