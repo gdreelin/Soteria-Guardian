@@ -1,0 +1,34 @@
+- id: soteria_device_unavailable_alert
+  alias: Soteria - Emergency Device Unavailable
+  description: Alerts the caregiver when a critical Soteria device becomes unavailable.
+  mode: parallel
+  max: 10
+
+  triggers:
+    - trigger: state
+      entity_id:
+        - binary_sensor.living_room_fp2_fall_detected
+        - light.soteria_emergency_lights
+        # Add the Aqara switch battery or availability entity when known.
+      to:
+        - unavailable
+        - unknown
+      for:
+        minutes: 3
+
+  conditions: []
+
+  actions:
+    - action: notify.mobile_app_caregiver_phone
+      data:
+        title: "Soteria Guardian Device Offline"
+        message: >-
+          A critical Soteria Guardian device is unavailable:
+          {{ trigger.to_state.name }}.
+          Check Home Assistant, Wi-Fi, power, and device status.
+        data:
+          tag: soteria-device-offline
+          channel: Soteria Guardian
+          importance: high
+          priority: high
+          ttl: 0
