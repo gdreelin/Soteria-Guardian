@@ -1,0 +1,15 @@
+alias: Soteria - Emergency Announcement
+description: Announces that an emergency alert has been activated.
+mode: restart
+sequence:
+  - action: notify.alexa_media
+    data:
+      target:
+        - media_player.living_room_echo
+        - media_player.bedroom_echo
+      message: >-
+        Emergency assistance has been requested.
+        The caregiver is being notified.
+      data:
+        type: announce
+        method: all

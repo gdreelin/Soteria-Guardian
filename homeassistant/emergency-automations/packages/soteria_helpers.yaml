@@ -1,0 +1,31 @@
+input_boolean:
+  soteria_emergency_active:
+    name: Soteria Emergency Active
+    icon: mdi:alarm-light
+
+  soteria_fall_confirmation_pending:
+    name: Soteria Fall Confirmation Pending
+    icon: mdi:human-handsup
+
+  soteria_resident_safe:
+    name: Soteria Resident Safe
+    icon: mdi:shield-check
+
+  soteria_caregiver_acknowledged:
+    name: Soteria Caregiver Acknowledged
+    icon: mdi:account-check
+
+timer:
+  soteria_fall_response:
+    name: Soteria Fall Response Timer
+    duration: "00:00:45"
+    restore: true
+
+input_button:
+  soteria_caregiver_acknowledge:
+    name: Soteria Caregiver Acknowledge
+    icon: mdi:check-circle
+
+  soteria_emergency_reset:
+    name: Soteria Emergency Reset
+    icon: mdi:restart-alert

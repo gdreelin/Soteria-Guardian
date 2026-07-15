@@ -1,0 +1,49 @@
+alias: Soteria - Red and Blue Emergency Alert
+description: Flashes separate Wyze RGB lights red and blue until the emergency is cleared.
+mode: restart
+sequence:
+  - repeat:
+      while:
+        - condition: state
+          entity_id: input_boolean.soteria_emergency_active
+          state: "on"
+      sequence:
+        - action: light.turn_on
+          target:
+            entity_id: light.soteria_red_emergency_lights
+          data:
+            rgb_color: [255, 0, 0]
+            brightness_pct: 100
+            transition: 0
+
+        - action: light.turn_off
+          target:
+            entity_id: light.soteria_blue_emergency_lights
+
+        - delay:
+            milliseconds: 500
+
+        - action: light.turn_off
+          target:
+            entity_id: light.soteria_red_emergency_lights
+
+        - action: light.turn_on
+          target:
+            entity_id: light.soteria_blue_emergency_lights
+          data:
+            rgb_color: [0, 0, 255]
+            brightness_pct: 100
+            transition: 0
+
+        - delay:
+            milliseconds: 500
+
+  - action: light.turn_on
+    target:
+      entity_id:
+        - light.soteria_red_emergency_lights
+        - light.soteria_blue_emergency_lights
+    data:
+      rgb_color: [255, 255, 255]
+      brightness_pct: 70
+      transition: 1
