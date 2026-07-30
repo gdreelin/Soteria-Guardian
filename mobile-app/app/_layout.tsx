@@ -14,7 +14,9 @@ export default function RootLayout() {
           contentStyle: { backgroundColor: colors.background },
         }}
       >
-        <Stack.Screen name="index" options={{ title: 'Soteria Guardian' }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="alert" options={{ headerShown: false, presentation: 'fullScreenModal' }} />
+        <Stack.Screen name="camera" options={{ title: 'Camera verification' }} />
         <Stack.Screen name="setup" options={{ title: 'Connect Home Assistant' }} />
       </Stack>
     </>

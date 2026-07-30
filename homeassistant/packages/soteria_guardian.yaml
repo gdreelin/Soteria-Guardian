@@ -70,6 +70,24 @@ script:
         event_data:
           resolved_at: "{{ now().isoformat() }}"
 
+  soteria_guardian_wellness_check:
+    alias: Soteria Guardian Wellness Check
+    mode: restart
+    sequence:
+      - event: soteria_guardian_wellness_check_started
+        event_data:
+          started_at: "{{ now().isoformat() }}"
+      # Add a visual prompt, Echo announcement, and response timer here.
+
+  soteria_guardian_notify_backup:
+    alias: Soteria Guardian Notify Backup Caregiver
+    mode: queued
+    sequence:
+      - event: soteria_guardian_backup_notified
+        event_data:
+          notified_at: "{{ now().isoformat() }}"
+      # Add the approved backup caregiver notify service here.
+
   soteria_guardian_system_test:
     alias: Soteria Guardian System Test
     mode: single

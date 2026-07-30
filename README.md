@@ -18,6 +18,7 @@
   <a href="#overview">Overview</a> •
   <a href="#features">Features</a> •
   <a href="#architecture">Architecture</a> •
+  <a href="#hardware">Hardware</a> •
   <a href="#supported-ecosystem">Devices</a> •
   <a href="#repository-structure">Repository</a> •
   <a href="#roadmap">Roadmap</a> •
@@ -85,13 +86,48 @@ It combines smart-home devices, deterministic emergency workflows, camera verifi
 
 **Soteria Guardian is the caregiver plane.** It provides visibility, alert acknowledgment, reports, configuration, and future wellness intelligence.
 
+## Hardware
+
+The initial Soteria Guardian reference setup uses off-the-shelf Aqara hardware plus a printed holder for the resident SOS button. Home Assistant remains the source of truth for device state, automations, and safety workflows.
+
+<table>
+<tr>
+<td width="25%" align="center" valign="top">
+<img src="images/hardware/aqara-mini-button.jpg" alt="Aqara Wireless Mini Switch" width="170"><br>
+<strong>Aqara Mini Button</strong><br>
+Resident SOS control for single, double, and long-press emergency workflows.
+</td>
+<td width="25%" align="center" valign="top">
+<img src="images/hardware/aqara-camera-hub-g350.png" alt="Aqara Camera Hub G350" width="170"><br>
+<strong>Aqara Indoor Security Camera G350</strong><br>
+Indoor verification camera for live view, snapshots, local recording, and hub duties.
+</td>
+<td width="25%" align="center" valign="top">
+<img src="images/hardware/aqara-presence-sensor-fp2.png" alt="Aqara Presence Sensor FP2" width="170"><br>
+<strong>Aqara Presence Sensor FP2</strong><br>
+mmWave room presence, zone tracking, inactivity signals, and ambient context.
+</td>
+<td width="25%" align="center" valign="top">
+<img src="images/hardware/aqara-mini-button-holder.png" alt="Aqara Mini Button Holder" width="170"><br>
+<strong>Aqara Mini Button Holder</strong><br>
+Printed holder for fixed placement or wearable mounting of the SOS button.
+</td>
+</tr>
+</table>
+
+### Connection Diagram
+
+<p align="center">
+  <img src="branding/diagrams/connection-diagram.svg" alt="Soteria Guardian hardware connection diagram" width="100%">
+</p>
+
 ## Supported Ecosystem
 
 | Component | Role |
 |---|---|
-| **Aqara Camera Hub G350** | Living-room video verification and local recording |
+| **Aqara Indoor Security Camera G350** | Living-room video verification, local recording, and camera-backed alert review |
 | **Aqara FP2** | Bedroom and living-room presence, zones, and inactivity logic |
-| **Aqara Wireless Mini Switch** | Wearable or fixed SOS control |
+| **Aqara Mini Button / Wireless Mini Switch** | Wearable or fixed SOS control |
 | **Amazon Echo** | Secondary voice and announcement layer |
 | **Smart lights** | Primary visual feedback for a hearing-impaired resident |
 | **Home Assistant on Intel NUC** | Automation, integration, state, and local control |

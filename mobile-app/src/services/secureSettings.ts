@@ -1,4 +1,4 @@
-import * as SecureStore from 'expo-secure-store';
+import { deleteStoredItem, getStoredItem, setStoredItem } from './deviceStorage';
 
 const URL_KEY = 'soteria_guardian_ha_url';
 const TOKEN_KEY = 'soteria_guardian_ha_token';
@@ -10,22 +10,22 @@ export type HomeAssistantCredentials = {
 
 export async function saveCredentials(credentials: HomeAssistantCredentials) {
   await Promise.all([
-    SecureStore.setItemAsync(URL_KEY, credentials.url.replace(/\/$/, '')),
-    SecureStore.setItemAsync(TOKEN_KEY, credentials.token.trim()),
+    setStoredItem(URL_KEY, credentials.url.replace(/\/$/, '')),
+    setStoredItem(TOKEN_KEY, credentials.token.trim()),
   ]);
 }
 
 export async function loadCredentials(): Promise<HomeAssistantCredentials | null> {
   const [url, token] = await Promise.all([
-    SecureStore.getItemAsync(URL_KEY),
-    SecureStore.getItemAsync(TOKEN_KEY),
+    getStoredItem(URL_KEY),
+    getStoredItem(TOKEN_KEY),
   ]);
   return url && token ? { url, token } : null;
 }
 
 export async function clearCredentials() {
   await Promise.all([
-    SecureStore.deleteItemAsync(URL_KEY),
-    SecureStore.deleteItemAsync(TOKEN_KEY),
+    deleteStoredItem(URL_KEY),
+    deleteStoredItem(TOKEN_KEY),
   ]);
 }

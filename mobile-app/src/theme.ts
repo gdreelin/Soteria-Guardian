@@ -1,16 +1,22 @@
 export const colors = {
-  background: '#050b12',
-  surface: '#0b1621',
-  surfaceAlt: '#101f2d',
-  border: '#24384a',
-  text: '#f3f7fb',
-  muted: '#9fb2c5',
-  blue: '#36a8ff',
-  cyan: '#37d7e6',
-  gold: '#e5a72d',
-  green: '#83c66a',
-  red: '#ef4f4f',
-  warning: '#f0b84b',
+  background: '#071019',
+  surface: '#0d1924',
+  surfaceAlt: '#132331',
+  surfaceSoft: '#172b39',
+  border: '#294354',
+  text: '#f7f9fb',
+  muted: '#a8bac8',
+  mutedStrong: '#c9d4dc',
+  blue: '#42a5f5',
+  cyan: '#45cbd8',
+  teal: '#39c6ad',
+  gold: '#e7ad42',
+  green: '#79cb8f',
+  red: '#f05b62',
+  redDark: '#8a2934',
+  warning: '#f3bd54',
+  white: '#ffffff',
+  black: '#000000',
 };
 
 export const spacing = {
@@ -19,4 +25,10 @@ export const spacing = {
   md: 16,
   lg: 24,
   xl: 32,
+};
+
+export const radius = {
+  sm: 8,
+  md: 12,
+  lg: 16,
 };
