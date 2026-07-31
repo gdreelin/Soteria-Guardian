@@ -93,7 +93,7 @@ The initial Soteria Guardian reference setup uses off-the-shelf Aqara hardware p
 <table>
 <tr>
 <td width="25%" align="center" valign="top">
-<img src="images/hardware/aqara-mini-button.jpg" alt="Aqara Wireless Mini Switch" width="170"><br>
+<img src="images/hardware/aqara-mini-button.png" alt="Aqara Wireless Mini Switch" width="170"><br>
 <strong>Aqara Mini Button</strong><br>
 Resident SOS control for single, double, and long-press emergency workflows.
 </td>
