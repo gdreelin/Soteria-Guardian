@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="220" viewBox="0 0 1400 220" role="img" aria-labelledby="title desc">
+  <title id="title">Safety notice warning</title>
+  <desc id="desc">Soteria Guardian is not a medical device, does not guarantee fall detection, and is not a replacement for 911 or a professionally monitored medical-alert service.</desc>
+  <rect x="12" y="12" width="1376" height="196" rx="10" fill="#fff7f7" stroke="#dc2626" stroke-width="8"/>
+  <text x="54" y="64" fill="#991b1b" font-family="Arial, sans-serif" font-size="28" font-weight="700">WARNING</text>
+  <text x="54" y="112" fill="#111827" font-family="Arial, sans-serif" font-size="30">
+    <tspan>Soteria Guardian is </tspan>
+    <tspan font-weight="700">not a medical device,</tspan>
+    <tspan> does not guarantee fall detection,</tspan>
+  </text>
+  <text x="54" y="150" fill="#111827" font-family="Arial, sans-serif" font-size="30">
+    <tspan>and is not a replacement for </tspan>
+    <tspan font-weight="700">911</tspan>
+    <tspan> or a professionally monitored medical-alert service.</tspan>
+  </text>
+</svg>

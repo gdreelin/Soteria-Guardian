@@ -204,7 +204,9 @@ See the detailed [roadmap](docs/ROADMAP.md).
 
 ## Safety Notice
 
-Soteria Guardian is **not a medical device**, does not guarantee fall detection, and is not a replacement for **911** or a professionally monitored medical-alert service.
+<p align="center">
+  <img src="branding/diagrams/safety-notice.svg" alt="Soteria Guardian is not a medical device, does not guarantee fall detection, and is not a replacement for 911 or a professionally monitored medical-alert service." width="100%">
+</p>
 
 ## Contributing
 
