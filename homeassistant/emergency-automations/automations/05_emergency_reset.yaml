@@ -1,0 +1,56 @@
+- id: soteria_emergency_reset
+  alias: Soteria - Emergency Reset
+  description: Clears emergency state, timers, scripts, lights, and persistent notifications.
+  mode: restart
+
+  triggers:
+    - trigger: state
+      entity_id: input_button.soteria_emergency_reset
+
+  conditions: []
+
+  actions:
+    - action: input_boolean.turn_off
+      target:
+        entity_id:
+          - input_boolean.soteria_emergency_active
+          - input_boolean.soteria_fall_confirmation_pending
+          - input_boolean.soteria_resident_safe
+          - input_boolean.soteria_caregiver_acknowledged
+
+    - action: timer.cancel
+      target:
+        entity_id: timer.soteria_fall_response
+
+    - action: script.turn_off
+      target:
+        entity_id:
+          - script.soteria_police_light_alert
+          - script.soteria_fall_question_lights
+
+    - action: light.turn_on
+      target:
+        entity_id: light.soteria_emergency_lights
+      data:
+        rgb_color: [255, 255, 255]
+        brightness_pct: 60
+        transition: 1
+
+    - action: persistent_notification.dismiss
+      data:
+        notification_id: soteria_possible_fall
+
+    - action: persistent_notification.dismiss
+      data:
+        notification_id: soteria_emergency
+
+    - action: persistent_notification.dismiss
+      data:
+        notification_id: soteria_emergency_acknowledged
+
+    - action: notify.mobile_app_caregiver_phone
+      data:
+        title: "Soteria Guardian Reset"
+        message: "The emergency alert was cleared by the caregiver."
+        data:
+          tag: soteria-emergency

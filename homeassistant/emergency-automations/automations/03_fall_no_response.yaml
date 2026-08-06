@@ -1,0 +1,70 @@
+- id: soteria_fall_no_response_escalation
+  alias: Soteria - Fall No-Response Escalation
+  description: Escalates a fall event when the resident does not confirm safety.
+  mode: restart
+
+  triggers:
+    - trigger: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.soteria_fall_response
+
+  conditions:
+    - condition: state
+      entity_id: input_boolean.soteria_fall_confirmation_pending
+      state: "on"
+
+    - condition: state
+      entity_id: input_boolean.soteria_resident_safe
+      state: "off"
+
+  actions:
+    - action: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.soteria_fall_confirmation_pending
+
+    - action: script.turn_off
+      target:
+        entity_id: script.soteria_fall_question_lights
+
+    - action: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.soteria_emergency_active
+
+    - action: script.turn_on
+      target:
+        entity_id: script.soteria_police_light_alert
+
+    - action: script.turn_on
+      target:
+        entity_id: script.soteria_announce_emergency
+
+    - action: persistent_notification.create
+      data:
+        title: "CRITICAL: Fall Detected — No Response"
+        message: >-
+          A possible fall was detected and the resident did not respond
+          within the configured confirmation period.
+        notification_id: soteria_emergency
+
+    - action: notify.mobile_app_caregiver_phone
+      data:
+        title: "CRITICAL: Fall Detected — No Response"
+        message: >-
+          The Aqara fall sensor detected a possible fall and the resident
+          did not respond within 45 seconds. Check the camera and contact
+          her immediately. Call emergency services when the situation
+          cannot be verified.
+        data:
+          tag: soteria-emergency
+          channel: Soteria Guardian Emergency
+          importance: high
+          priority: high
+          ttl: 0
+          persistent: true
+          sticky: true
+          actions:
+            - action: SOTERIA_ACKNOWLEDGE
+              title: Acknowledge
+            - action: SOTERIA_RESET
+              title: Reset Alert

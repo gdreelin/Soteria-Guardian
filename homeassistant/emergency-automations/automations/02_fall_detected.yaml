@@ -1,0 +1,64 @@
+- id: soteria_possible_fall_detected
+  alias: Soteria - Possible Fall Detected
+  description: Asks the resident to confirm safety and escalates when no response is received.
+  mode: restart
+
+  triggers:
+    - trigger: state
+      entity_id:
+        - binary_sensor.living_room_fp2_fall_detected
+        # - binary_sensor.REPLACE_WITH_ADDITIONAL_FALL_SENSOR
+      from: "off"
+      to: "on"
+
+  conditions:
+    - condition: state
+      entity_id: input_boolean.soteria_emergency_active
+      state: "off"
+
+  actions:
+    - action: input_boolean.turn_off
+      target:
+        entity_id:
+          - input_boolean.soteria_resident_safe
+          - input_boolean.soteria_caregiver_acknowledged
+
+    - action: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.soteria_fall_confirmation_pending
+
+    - action: timer.start
+      target:
+        entity_id: timer.soteria_fall_response
+      data:
+        duration: "00:00:45"
+
+    - action: script.turn_on
+      target:
+        entity_id: script.soteria_fall_question_lights
+
+    - action: script.turn_on
+      target:
+        entity_id: script.soteria_announce_fall_question
+
+    - action: persistent_notification.create
+      data:
+        title: "Soteria Possible Fall"
+        message: >-
+          A possible fall was detected. The resident has 45 seconds
+          to confirm that she is okay.
+        notification_id: soteria_possible_fall
+
+    - action: notify.mobile_app_caregiver_phone
+      data:
+        title: "Soteria Guardian: Possible Fall"
+        message: >-
+          The Aqara fall sensor detected a possible fall.
+          Soteria Guardian is asking the resident to confirm that she is okay.
+          Automatic escalation will occur if she does not respond.
+        data:
+          tag: soteria-fall-status
+          channel: Soteria Guardian
+          importance: high
+          priority: high
+          ttl: 0

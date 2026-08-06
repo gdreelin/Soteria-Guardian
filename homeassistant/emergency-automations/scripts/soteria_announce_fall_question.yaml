@@ -1,0 +1,16 @@
+alias: Soteria - Ask Resident If Okay
+description: Announces the fall confirmation request through supported Alexa devices.
+mode: restart
+sequence:
+  - action: notify.alexa_media
+    data:
+      target:
+        - media_player.living_room_echo
+        - media_player.bedroom_echo
+      message: >-
+        A possible fall was detected.
+        Press your emergency button once if you are okay.
+        Press and hold the button if you need immediate help.
+      data:
+        type: announce
+        method: all

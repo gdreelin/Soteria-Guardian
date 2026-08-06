@@ -1,0 +1,140 @@
+- id: soteria_aqara_button_handler
+  alias: Soteria - Aqara Button Press Handler
+  description: Handles resident-safe confirmation and manual emergency button actions.
+  mode: restart
+
+  triggers:
+    # Replace these three trigger blocks with the actual trigger YAML generated
+    # by Home Assistant for your Aqara switch integration.
+    - trigger: device
+      device_id: REPLACE_WITH_AQARA_DEVICE_ID
+      domain: mqtt
+      type: action
+      subtype: single
+      id: single
+
+    - trigger: device
+      device_id: REPLACE_WITH_AQARA_DEVICE_ID
+      domain: mqtt
+      type: action
+      subtype: double
+      id: double
+
+    - trigger: device
+      device_id: REPLACE_WITH_AQARA_DEVICE_ID
+      domain: mqtt
+      type: action
+      subtype: hold
+      id: hold
+
+  conditions: []
+
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: single
+            - condition: state
+              entity_id: input_boolean.soteria_fall_confirmation_pending
+              state: "on"
+          sequence:
+            - action: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.soteria_resident_safe
+
+            - action: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.soteria_fall_confirmation_pending
+
+            - action: timer.cancel
+              target:
+                entity_id: timer.soteria_fall_response
+
+            - action: script.turn_off
+              target:
+                entity_id: script.soteria_fall_question_lights
+
+            - action: light.turn_on
+              target:
+                entity_id: light.soteria_emergency_lights
+              data:
+                rgb_color: [0, 255, 0]
+                brightness_pct: 70
+
+            - delay:
+                seconds: 5
+
+            - action: light.turn_off
+              target:
+                entity_id: light.soteria_emergency_lights
+
+            - action: notify.mobile_app_caregiver_phone
+              data:
+                title: "Soteria Guardian: Resident Responded"
+                message: >-
+                  A possible fall was detected, but the resident pressed
+                  the confirmation button to report that she is okay.
+                data:
+                  tag: soteria-fall-status
+                  channel: Soteria Guardian
+
+        - conditions:
+            - condition: or
+              conditions:
+                - condition: trigger
+                  id: double
+                - condition: trigger
+                  id: hold
+                - condition: and
+                  conditions:
+                    - condition: trigger
+                      id: single
+                    - condition: state
+                      entity_id: input_boolean.soteria_fall_confirmation_pending
+                      state: "off"
+          sequence:
+            - action: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.soteria_fall_confirmation_pending
+
+            - action: timer.cancel
+              target:
+                entity_id: timer.soteria_fall_response
+
+            - action: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.soteria_emergency_active
+
+            - action: script.turn_on
+              target:
+                entity_id: script.soteria_police_light_alert
+
+            - action: script.turn_on
+              target:
+                entity_id: script.soteria_announce_emergency
+
+            - action: persistent_notification.create
+              data:
+                title: "Soteria Emergency"
+                message: "The resident activated the Aqara emergency button."
+                notification_id: soteria_emergency
+
+            - action: notify.mobile_app_caregiver_phone
+              data:
+                title: "EMERGENCY: Resident Pressed Panic Button"
+                message: >-
+                  The resident activated the Soteria Guardian emergency button.
+                  Check the camera and contact her immediately.
+                data:
+                  tag: soteria-emergency
+                  channel: Soteria Guardian Emergency
+                  importance: high
+                  priority: high
+                  ttl: 0
+                  persistent: true
+                  sticky: true
+                  actions:
+                    - action: SOTERIA_ACKNOWLEDGE
+                      title: Acknowledge
+                    - action: SOTERIA_RESET
+                      title: Reset Alert

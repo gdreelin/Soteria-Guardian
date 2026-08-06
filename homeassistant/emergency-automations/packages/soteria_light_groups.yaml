@@ -1,0 +1,23 @@
+light:
+  - platform: group
+    name: Soteria Red Emergency Lights
+    unique_id: soteria_red_emergency_lights
+    entities:
+      - light.living_room_lamp_left
+      # - light.REPLACE_WITH_ADDITIONAL_RED_WYZE_BULB
+
+  - platform: group
+    name: Soteria Blue Emergency Lights
+    unique_id: soteria_blue_emergency_lights
+    entities:
+      - light.living_room_lamp_right
+      - light.living_room_ceiling
+      # - light.REPLACE_WITH_ADDITIONAL_BLUE_WYZE_BULB
+
+  - platform: group
+    name: Soteria Emergency Lights
+    unique_id: soteria_emergency_lights
+    entities:
+      - light.living_room_lamp_left
+      - light.living_room_lamp_right
+      - light.living_room_ceiling
